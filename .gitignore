@@ -1,13 +1,17 @@
-# Environment variables
-.env
+# Log files
+*.log
 
-# Python cache files
+# Finetuning results
+backend/finetuning/results/
+backend/finetuning/results/outputs/
+backend/data/rag_content/
+
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
-env/
 build/
 develop-eggs/
 dist/
@@ -19,26 +23,20 @@ lib64/
 parts/
 sdist/
 var/
+wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 
-# Virtual environments
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.next/
+
+# Virtual Environment
 venv/
-ENV/
 env/
-
-# Model outputs and logs
-finetuning/results/
-*.log
-finetune_output/
-data/rag_content/
-
-# Local vector store files
-vector_store/
-
-# HuggingFace cache
-.cache/
+ENV/
 
 # IDE files
 .idea/
@@ -46,11 +44,3 @@ vector_store/
 *.swp
 *.swo
 
-# OS specific files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db

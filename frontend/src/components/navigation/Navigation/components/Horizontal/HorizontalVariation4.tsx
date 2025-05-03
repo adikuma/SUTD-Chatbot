@@ -1,0 +1,61 @@
+import React, { useMemo } from 'react'
+import { Orientation, Variant } from '@enums/ui'
+import { Box, List, ListProps, Text } from '@components'
+import { useHandleRouteChange, useIsMobile, useOpenCloseState } from '@hooks/ui'
+import { generateListWithRoutings } from '@utils/handleGeneration'
+import * as styles from './styles'
+import {
+  MobileDrawer,
+  MobileToolbar,
+  Toolbar,
+  ToolbarActionItems
+} from './common'
+
+const HorizontalVariation4: React.FC<ListProps> = ({ items }) => {
+  const handleRouteChange = useHandleRouteChange()
+  const isMobile = useIsMobile()
+  const { open, handleOpen, handleClose } = useOpenCloseState(false)
+
+  const itemsWithRouting = useMemo<any>(
+    () => generateListWithRoutings(items, handleRouteChange),
+    [items]
+  )
+
+  return (
+    <>
+      <Toolbar>
+        {isMobile && <MobileToolbar handleOpen={handleOpen} />}
+
+        {!isMobile && (
+          <>
+            <Text
+              content={'LOGO'}
+              variant={Variant.Text.H6}
+              sx={styles.nav_inner_text}
+            />
+
+            <Box sx={styles.nav_outer_box}>
+              <Box sx={styles.nav_inner_box_items}>
+                <List
+                  items={itemsWithRouting}
+                  orientation={Orientation.HORIZONTAL}
+                />
+              </Box>
+
+              <ToolbarActionItems />
+            </Box>
+          </>
+        )}
+      </Toolbar>
+
+      <MobileDrawer
+        items={itemsWithRouting}
+        isMobile={isMobile}
+        open={open}
+        handleClose={handleClose}
+      />
+    </>
+  )
+}
+
+export default HorizontalVariation4
