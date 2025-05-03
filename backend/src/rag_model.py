@@ -7,7 +7,7 @@ from transformers import BitsAndBytesConfig
 import bitsandbytes
 
 
-def get_llm(model_id="meta-llama/Llama-3.2-3B-Instruct", device=0, max_new_tokens=100):
+def get_llm(model_id="meta-llama/Llama-3.2-3B-Instruct", device=0, max_new_tokens=128):
     # create the tokenizer and model
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     is_finetuned = "adi0308" in model_id
@@ -78,12 +78,12 @@ def get_qa_prompt():
     prompt_template = """
     Use the following pieces of context to answer the question at the end. Please follow these rules:
     1. If you don't know the answer, don't try to make up an answer. Just say, "I can't find the final answer."
-    2. If you find the answer, write it in a concise way with no more than four sentences.
+    2. If you find the answer, write it in a concise way with no more than three sentences.
     3. Do not add any extra information beyond what is supported by the context.
     {context}
-    
+
     Question: {question}
-    
+
     Answer:
     """
 
